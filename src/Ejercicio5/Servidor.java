@@ -63,17 +63,26 @@ public class Servidor{
 
                 //Fichero a transferir
                 String filename = carpetaArchivosStr + nombrefichero;
+
                 File ficheroTransferir = new File( filename );
-                entrada = new BufferedInputStream(new FileInputStream(ficheroTransferir));
-                salida = new BufferedOutputStream(connection.getOutputStream());
 
-                //Enviamos el fichero
-                byteArray = new byte[8192];
-                while ((in = entrada.read(byteArray)) != -1){
-                    salida.write(byteArray,0,in);
+                if (ficheroTransferir.exists()) {
+                    output.writeBoolean(false);
+                } else {
+                    output.writeBoolean(true);
+
+
+                    entrada = new BufferedInputStream(new FileInputStream(ficheroTransferir));
+                    salida = new BufferedOutputStream(connection.getOutputStream());
+
+                    //Enviamos el fichero
+                    byteArray = new byte[8192];
+                    while ((in = entrada.read(byteArray)) != -1) {
+                        salida.write(byteArray, 0, in);
+                    }
+
+                    salida.close();
                 }
-
-                salida.close();
                 input.close();
             }
         }catch (Exception e ) {

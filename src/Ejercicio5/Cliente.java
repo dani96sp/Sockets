@@ -38,18 +38,23 @@ public class Cliente{
 
                 output.writeUTF(fichero);
 
-                //Buffer de 1024 bytes
-                receivedData = new byte[1024];
+                // Comprobamos si el fichero existe
+                if (!input.readBoolean()) {
+                    // Si no existe, error
+                    System.out.println("No existe un fichero con ese nombre.");
+                } else {
+                    //Buffer de 1024 bytes
+                    receivedData = new byte[1024];
 
-                //Para guardar fichero recibido
-                salida = new BufferedOutputStream(new FileOutputStream(carpetaArchivosStrCliente + fichero));
-                while ((in = entrada.read(receivedData)) != -1) {
-                    salida.write(receivedData, 0, in);
+                    //Para guardar fichero recibido
+                    salida = new BufferedOutputStream(new FileOutputStream(carpetaArchivosStrCliente + fichero));
+                    while ((in = entrada.read(receivedData)) != -1) {
+                        salida.write(receivedData, 0, in);
+                    }
+
+                    System.out.println("Se ha descargado el archivo correctamente y lo podrá encontrar en la siguiente ruta tras finalizar la ejecución: ");
+                    System.out.println(carpetaArchivosStrCliente);
                 }
-
-                System.out.println("Se ha descargado el archivo correctamente y lo podrá encontrar en la siguiente ruta tras finalizar la ejecución: ");
-                System.out.println(carpetaArchivosStrCliente);
-
 
                 String opcion = "";
                 while (!(opcion.equals("2") || opcion.equals("1"))) {
