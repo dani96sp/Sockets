@@ -38,7 +38,16 @@ public class Servidor{
                 FilenameFilter filtro = new FilenameFilter() {
                     @Override
                     public boolean accept(File carpeta, String nombre) {
-                        return nombre.contains("txt");
+                        String lastFourDigits = "";     //substring containing last 4 characters
+
+                        if (nombre.length() > 4)
+                        {
+                            lastFourDigits = nombre.substring(nombre.length() - 4);
+                        } else {
+                            lastFourDigits = nombre;
+                        }
+
+                        return lastFourDigits.equals(".txt");
                     }
                 };
 
@@ -61,16 +70,23 @@ public class Servidor{
 
                 if (nombrefichero.equals("0")) break;
 
+                boolean encontrado = false;
+                for(String s : nombres) {
+                    if (s.equals(nombrefichero)) {
+                        encontrado = true;
+                        break;
+                    }
+                }
+
                 //Fichero a transferir
                 String filename = carpetaArchivosStr + nombrefichero;
 
                 File ficheroTransferir = new File( filename );
 
-                if (ficheroTransferir.exists()) {
+                if (!encontrado) {
                     output.writeBoolean(false);
                 } else {
                     output.writeBoolean(true);
-
 
                     entrada = new BufferedInputStream(new FileInputStream(ficheroTransferir));
                     salida = new BufferedOutputStream(connection.getOutputStream());
