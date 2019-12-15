@@ -51,9 +51,9 @@ public class Cliente{
                     while ((in = entrada.read(receivedData)) != -1) {
                         salida.write(receivedData, 0, in);
                     }
-
                     System.out.println("Se ha descargado el archivo correctamente y lo podrá encontrar en la siguiente ruta tras finalizar la ejecución: ");
                     System.out.println(carpetaArchivosStrCliente);
+                    salida.close();
                 }
 
                 String opcion = "";
@@ -67,12 +67,13 @@ public class Cliente{
                     }
                     if (opcion.equals("2")) {
                         repetir = false;
-                        entrada.close();
-                        salida.close();
                     }
                 }
+                entrada.close();
+                output.close();
+                input.close();
+                cliente.close();
             }
-
         }catch ( Exception e ) {
             System.err.println(e);
         }

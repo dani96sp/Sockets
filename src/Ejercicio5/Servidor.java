@@ -46,7 +46,6 @@ public class Servidor{
                         } else {
                             lastFourDigits = nombre;
                         }
-
                         return lastFourDigits.equals(".txt");
                     }
                 };
@@ -96,11 +95,14 @@ public class Servidor{
                     while ((in = entrada.read(byteArray)) != -1) {
                         salida.write(byteArray, 0, in);
                     }
-
+                    entrada.close();
                     salida.close();
                 }
                 input.close();
+                output.close();
+                connection.close();
             }
+            server.close();
         }catch (Exception e ) {
             System.err.println(e);
         }

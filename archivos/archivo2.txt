@@ -2,15 +2,3 @@ archivo de texto 2
 contiene texto
 mucho texto
 más texto todavía
-
-
-ejercicios tipo test
-funciones capa nivel internet - transporte, tcp
-funciones protocolo ip
-clases java crear sockets
-para que sirven los metodos de las clases sockets y serversockets
-modelo p2p para que es
-
-ejercicio practico
-cliente - servidor similar al ejercicio 6 de sockets
-
