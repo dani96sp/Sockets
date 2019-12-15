@@ -1,8 +1,8 @@
-package Ejercicio5;
+package Ejercicio6;
 
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.net.*;
 import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Servidor{
     public static void main (String[] args){
@@ -39,19 +39,11 @@ public class Servidor{
                     @Override
                     public boolean accept(File carpeta, String nombre) {
                         File archivo = new File(carpeta.getAbsolutePath() + "\\" + nombre);
-                        String lastFourDigits = "";     //substring containing last 4 characters
-
-                        if (nombre.length() > 4)
-                        {
-                            lastFourDigits = nombre.substring(nombre.length() - 4);
-                        } else {
-                            lastFourDigits = nombre;
-                        }
-                        return (lastFourDigits.equals(".txt") && !archivo.isDirectory());
+                        return !archivo.isDirectory();
                     }
                 };
 
-                // Recogemos los nombres de archivo con un filtro para que contengan .txt y no sean directorios
+                // Recogemos los nombres de archivo con un filtro para que no sean carpetas
                 nombres = carpeta.list(filtro);
                 // La cantidad
                 cantidad = nombres.length;

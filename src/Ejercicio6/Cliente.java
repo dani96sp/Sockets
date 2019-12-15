@@ -1,7 +1,7 @@
-package Ejercicio5;
+package Ejercicio6;
 
-import java.net.*;
 import java.io.*;
+import java.net.Socket;
 import java.util.Scanner;
 
 public class Cliente{
